@@ -30,5 +30,4 @@ function logging.make_loggers(...)
   return log
 end
 
-
 return logging

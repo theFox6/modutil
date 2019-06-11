@@ -1,21 +1,25 @@
-local init = os.clock()
-minetest.log("action", "["..minetest.get_current_modname().."] loading...")
+minetest.log("action", "["..minetest.get_current_modname().."] loading init")
 
-modutil = {}
 local modpath = minetest.get_modpath("modutil")
 
+minetest.log("action", "["..minetest.get_current_modname().."] loading log")
+local logging = dofile(modpath.."/log.lua")
+local log = logging.make_loggers("action")
+log.action("loaded log")
+
+modutil = {}
 local modules = {
-  init = modutil -- just in case anybody tries funny stuff
+  init = modutil, -- just in case anybody tries funny stuff
+  log = logging  -- preloaded
 }
 
 function modutil.require(module)
   if not modules[module] then
+    log.action("loading "..module)
     modules[module] = dofile(modpath.."/"..module..".lua") or true
+    log.action("loaded "..module)
   end
   return modules[module]
 end
 
-local log = modutil.require("log").make_loggers("action")
-
-local time_to_load = os.clock() - init
-log.action("loaded in %.4f s", time_to_load)
+log.action("loaded init")

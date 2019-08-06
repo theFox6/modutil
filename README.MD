@@ -61,3 +61,50 @@ use:
   -- returns id in the format "modname:name"
   local id = check_prefix(name)
 ```
+
+## textures
+
+A module that contains some helpers for textures.
+Load it as usual with:
+```lua
+  textures = modutil.require("textures")
+```
+
+```lua
+  textures.inventorycube(face_top, face_left, face_right)
+```
+will create an inventorycube modifier consisting the three given faces
+
+```lua
+  textures.get_node_inventory_image(nodename)
+```
+will return the inventory image of a node
+or an inventory cube created from the tiles of the node
+
+## strings
+
+A module that contains some helpers for strings.
+Load it as usual with:
+```lua
+  strings = modutil.require("strings")
+  -- to write it into the native string functions do
+  modutil.require("strings").overwrite_string()
+```
+
+```lua
+  strings.starts_with(str, prefix)
+  -- if overwritten you can also use
+  str:starts_with(prefix)
+```
+checks if a given string starts with a given other
+
+```lua
+  strings.ends_with(str, suffix)
+  -- if overwritten you can also use
+  str:ends_with(suffix)
+```
+checks if a given string ends with a given other
+
+# license
+This mod is under the MIT License.
+Some string and texture utils are from modlib by appgurueu (aka LMD) which is under MIT License.

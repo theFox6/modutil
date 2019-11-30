@@ -9,8 +9,10 @@ function strings.ends_with(str, suffix)
 end
 
 function strings.overwrite_string()
-	string.starts_with = strings.starts_with
-	string.ends_with = strings.ends_with
+	--string.starts_with = strings.starts_with
+	rawset(string, "starts_with", strings.starts_with)
+	--string.ends_with = strings.ends_with
+	rawset(string, "ends_with", strings.ends_with)
 end
 
 return strings

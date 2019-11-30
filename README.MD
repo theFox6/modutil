@@ -13,6 +13,56 @@ To load a module use:
 The variable then contains the return value of the module.
 That will in  most cases be a table or a function.
 
+## local_require
+
+A module for creating a function that can be used to make your own mod modular.  
+It will create a module table that contains the loaded modules of your mod.  
+The require function will check if the lua file is already loaded, load it if nessecary
+and return the return value from the loaded file.  
+Example:  
+(use your modname instead of my_mod if you copy this)
+
+```lua
+  my_mod={
+    modpath = minetest.get_modpath("my_mod") or minetest.get_modpath(minetest.get_current_modname())
+  }
+  -- this modules table is optional you don't need to give it as second argument 
+  local modules = {
+    -- use this if you have your own logging functions
+    -- log = dofile(my_mod.modpath.."/my_log.lua")
+  }
+  modutil.require("local_require")(my_mod,modules)
+  
+  -- log is preloaded 
+  local log = my_mod.require("log")
+  
+  -- load some files from your mod:
+  -- for example if util.lua returns a table with utility functions
+  local util = my_mod.require("util")
+  util.do_something()
+  -- load other files just like with dofile
+  my_mod.require ("nodes")
+  -- you don't have to add the parentheses in lua
+  my_mod.require "craft"
+  -- use / for folders just like dofile
+  my_mod.require "items/register"
+  my_mod.require "items/craft"
+  --if any of the files above requires util too
+  --it can call my_mod.require("util") again and the util.lua file won't be run twice
+```
+
+Implementation details:
+* your modtable (my_mod in the example) has to contain a field named modpath containing the modpath
+* you can give a table as second argument that will be filled with the loaded modules (use this for preloading etc.)
+* if no second argument is present a module table will be created
+* the module log will be loaded from modutil if you don't add your own logging functions to the module table
+* the module log has to return a table containing at least the function "info"
+* the already loaded module log will prevent loading a file called log.lua in your modpath when require is used
+* your modtable will receive a field called require containing the module loading function
+* if you don't have a field called init in the module table it will be set to your modtable
+* by default `my_mod.require("init")` will return your modtable
+* just look at local_require.lua for more details
+
 ## log
 
 A module for creating shorter logging functions.  

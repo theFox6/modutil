@@ -17,7 +17,7 @@ local logging = dofile(modutil_path.."/log.lua")
 local log = logging.make_loggers("action","debug")
 log.action("loaded log")
 
-local portable = {portable = true}
+local portable = {portable = true, log = log}
 local modules = {
   init = portable, -- just in case anybody tries funny stuff
   log = logging  -- preloaded
@@ -34,7 +34,7 @@ end
 
 if modutil then
 	log.debug("modutil already loaded")
-end
+else
 	log.action("setting modutil global")
 	modutil = portable
 end

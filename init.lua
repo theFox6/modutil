@@ -16,7 +16,7 @@ if modutil then
 end
 
 log.action("setting modutil global")
-modutil = {portable = false}
+modutil = {portable = false, log = log}
 local modules = {
   init = modutil, -- just in case anybody tries funny stuff
   log = logging  -- preloaded

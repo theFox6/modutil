@@ -1,13 +1,14 @@
 local loader = minetest.get_current_modname()
 minetest.log("action", "["..loader.."] loading modutil portable")
 
-local modutil_path = minetest.get_modpath(loader).."/modutil"
+local loader_path = minetest.get_modpath(loader)
+local modutil_path = loader_path.."/modutil"
 do
-	local handle = io.open(modlib_path.."/init.lua","r")
+	local handle = io.open(modutil_path.."/init.lua","r")
 	if handle then
 		io.close(handle)
 	else
-		minetest.log("error", "modutil was expected at: " .. modlib_path)
+		minetest.log("error", "modutil was expected at: " .. modutil_path)
 		error("modutil portable could not be found inside loading mod: "..loader)
 	end
 end

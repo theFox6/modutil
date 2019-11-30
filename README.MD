@@ -13,6 +13,30 @@ To load a module use:
 The variable then contains the return value of the module.
 That will in  most cases be a table or a function.
 
+## modutil portable
+You can put modutil into your own mod and avoid adding a hard dependency.
+Therefore you have to put modutil directly into your mods folder.
+You can load the portable.lua which will return the portable modlib.  
+You can use the following code snippet to load it:
+
+```lua
+  local my_modutil = dofile(modpath.."/modutil/portable.lua")
+  -- use the following line to add it to your prevoiusly created mod table
+  -- your_modname.modutil = my_modutil or dofile(modpath.."/modutil/portable.lua")
+```
+
+Also you could check if modutil is already loaded and then use the global modutil table:
+
+```lua
+  if not modutil then
+    dofile(modpath.."/modutil/portable.lua")
+  end
+  local log = modutil.require("log").make_loggers("action","info")
+  log.action("yay, it's loaded")
+```
+
+You'll need an optional dependency on modutil if you want to use the global modutil table.
+
 ## local_require
 
 A module for creating a function that can be used to make your own mod modular.  

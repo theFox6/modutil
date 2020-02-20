@@ -37,6 +37,16 @@ Also you could check if modutil is already loaded and then use the global moduti
 
 You'll need an optional dependency on modutil if you want to use the global modutil table.
 
+## VenusParser
+
+A parser for venus files. Read [it's readme](VenusParser/README.MD) for more info.  
+The parser can load and run venus files.
+Example:
+```lua
+local vp = modutil.require("VenusParser")
+vp.dovenus(modpath.."/some_file.venus")
+```
+
 ## local_require
 
 A module for creating a function that can be used to make your own mod modular.  

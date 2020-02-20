@@ -8,6 +8,8 @@ local function make_table(modtable, moduletable)
     modules.log = modutil.require("log").make_loggers()
   end
   
+  --TODO: support for venus files
+  
   local function local_require(module)
     local log = modules.log or modutil.log
     if not modules[module] then

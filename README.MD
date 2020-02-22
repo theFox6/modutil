@@ -53,6 +53,7 @@ A module for creating a function that can be used to make your own mod modular.
 It will create a module table that contains the loaded modules of your mod.  
 The require function will check if the lua file is already loaded, load it if nessecary
 and return the return value from the loaded file.  
+It can also natively load venus files.  
 Example:  
 (use your modname instead of my_mod if you copy this)
 
@@ -76,11 +77,14 @@ Example:
   util.do_something()
   -- load other files just like with dofile
   my_mod.require ("nodes")
+  -- if your want to load venus files
+  -- add the second argument: the file type
+  my_mod.require("chests","venus")
   -- you don't have to add the parentheses in lua
   my_mod.require "craft"
   -- use / for folders just like dofile
   my_mod.require "items/register"
-  my_mod.require "items/craft"
+  my_mod.require("items/craft","lua")
   --if any of the files above requires util too
   --it can call my_mod.require("util") again and the util.lua file won't be run twice
 ```
@@ -90,12 +94,17 @@ Implementation details:
 * you can give a table as second argument that will be filled with the loaded modules (use this for preloading etc.)
 * if no second argument is present a module table will be created
 * the module log will be loaded from modutil if you don't add your own logging functions to the module table
-* the module log has to return a table containing at least the function "info"
+* the module log has to return a table containing at least the function "action"
 * the already loaded module log will prevent loading a file called log.lua in your modpath when require is used
 * your modtable will receive a field called require containing the module loading function
+  * the first argument to the require function is the module name
+  * the second argument to the require function is the file type given as string
+  * it can load "venus" and "lua" files
+  * if no file type is given it will load the file as lua file
+  * if the module is already loaded the second argument will be ignored
 * if you don't have a field called init in the module table it will be set to your modtable
 * by default `my_mod.require("init")` will return your modtable
-* just look at local_require.lua for more details
+* look at local_require.lua for more details
 
 ## log
 
@@ -127,9 +136,9 @@ The module returns a fucntion that when called returns the translator.
 use:
 
 ```lua
-  my_mod.S = modutil.require("translations")()
+  my_mod.S = modutil.require("translations","venus")()
   -- or for after loading
-  my_mod.S = modutil.require("translations")("my_mod")
+  my_mod.S = modutil.require("translations","venus")("my_mod")
 ```
 
 ## check_prefix
@@ -139,7 +148,7 @@ It will assume the modname is correct if it called after loading.
 use:
 
 ```lua
-  local check_prefix = modutil.require("check_prefix")
+  local check_prefix = modutil.require("check_prefix","venus")
   -- checks if name is in the format "modname:name" or ":modname:name"
   -- if modname in "modname:name" is not the currently loaded mod it creates an error
   -- returns id in the format "modname:name"
@@ -151,7 +160,7 @@ use:
 A module that contains some helpers for textures.
 Load it as usual with:
 ```lua
-  textures = modutil.require("textures")
+  textures = modutil.require("textures","venus")
 ```
 
 ```lua
@@ -170,9 +179,9 @@ or an inventory cube created from the tiles of the node
 A module that contains some helpers for strings.
 Load it as usual with:
 ```lua
-  strings = modutil.require("strings")
+  strings = modutil.require("strings","venus")
   -- to write it into the native string functions do
-  modutil.require("strings").overwrite_string()
+  modutil.require("strings","venus").overwrite_string()
 ```
 
 ```lua

@@ -7,10 +7,10 @@ local mutil = {
   modpath = modutil_path
 }
 
-dofile(modutil_path.."/loader.lua")
+dofile(modutil_path.."/loader.lua")(mutil)
 local log = mutil.log
 
-if modutil then
+if rawget(_G,"modutil") then
   if modutil.portable then
     log.debug("overriding modutil portable")
   else

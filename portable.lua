@@ -18,10 +18,10 @@ local portable = {
   modpath = modutil_path
 }
 
-dofile(modutil_path.."/loader.lua")
+dofile(modutil_path.."/loader.lua")(portable)
 local log = portable.log
 
-if modutil then
+if rawget(_G,"modutil") then
   log.debug("modutil already loaded")
 else
   log.action("setting modutil global")

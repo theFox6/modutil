@@ -1,24 +1,24 @@
 local function make_table(modtable, moduletable)
   local modules = moduletable or {}
-  
+
   if not modules.init then
     modules.init = modtable
   end
   if not modules.log then
     modules.log = modutil.require("log").make_loggers()
   end
-  
+
   local function load_lua(module)
     modules[module] = dofile(modtable.modpath.."/"..module..".lua") or true
     return modules[module]
   end
-  
+
   local vp = modules.VenusParser or modutil.require("VenusParser")
   local function load_venus(module)
     modules[module] = vp.dovenus(modtable.modpath.."/"..module..".venus") or true
     return modules[module]
   end
-  
+
  local function local_require(module,modtype)
     local log = modules.log or modutil.log
     local modt = modtype or "lua"
@@ -35,7 +35,7 @@ local function make_table(modtable, moduletable)
     end
     return modules[module]
   end
-  
+
   modtable.require = local_require
   return local_require
 end

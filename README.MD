@@ -106,27 +106,27 @@ Implementation details:
 * by default `my_mod.require("init")` will return your modtable
 * look at local_require.lua for more details
 
-## log
+## logging
 
 A module for creating shorter logging functions.  
 The loggers will format the given log message and call minetest.log.  
 Typically you want to use it as following:
 
 ```lua
-  my_mod.log = modutil.require("log").make_loggers()
+  my_mod.log = modutil.require("logging").make_loggers()
   my_mod.log.action("loggers loaded")
 ```
 
 You can also pass the level of the loggers to the make_loggers function:
 
 ```lua
-  my_mod.log = modutil.require("log").make_loggers("action","warning","error","debug")
+  my_mod.log = modutil.require("logging").make_loggers("action","warning","error","debug")
 ```
 
 If you create your logger after loading the mod you may want to pass the modname using:
 
 ```lua
-  my_mod.log.info = modutil.require("log").make_logger("info","my_mod")
+  my_mod.log.info = modutil.require("logging").make_logger("info","my_mod")
 ```
 
 ## translations

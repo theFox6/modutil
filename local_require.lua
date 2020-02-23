@@ -23,7 +23,7 @@ local function make_table(modtable, moduletable)
     local log = modules.log or modutil.log
     local modt = modtype or "lua"
     if not modules[module] then
-      log.action("loading "..module)
+      log.info("loading "..module)
       if modt == "venus" then
         load_venus(module)
       elseif modt == "lua" then
@@ -31,7 +31,7 @@ local function make_table(modtable, moduletable)
       else
         error(("bad module type: %s"):format(modt),2)
       end
-      log.action("loaded "..module)
+      log.info("loaded "..module)
     end
     return modules[module]
   end

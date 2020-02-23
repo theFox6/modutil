@@ -94,7 +94,7 @@ Implementation details:
 * you can give a table as second argument that will be filled with the loaded modules (use this for preloading etc.)
 * if no second argument is present a module table will be created
 * the module log will be loaded from modutil if you don't add your own logging functions to the module table
-* the module log has to return a table containing at least the function "action"
+* the module log has to return a table containing at least the function "info"
 * the already loaded module log will prevent loading a file called log.lua in your modpath when require is used
 * your modtable will receive a field called require containing the module loading function
   * the first argument to the require function is the module name

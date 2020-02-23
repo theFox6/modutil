@@ -5,7 +5,7 @@ return function (mutil)
   minetest.log("action", "["..minetest.get_current_modname().."] loading logging")
   local logging = dofile(modpath.."/logging.lua")
   modules.logging = logging
-  local log = logging.make_loggers("debug","action","warning")
+  local log = logging.make_loggers("info","debug","action","warning")
   log.action("loaded logging")
   modules.log = log
   mutil.log = log

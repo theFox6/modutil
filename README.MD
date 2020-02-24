@@ -1,6 +1,6 @@
 # modutil
 A utility mod for minetetest providing useful utilities that can be used in other mods.  
-![[luacheck](https://github.com/theFox6/modutil/workflows/code%20checks/badge.svg)](https://github.com/theFox6/modutil/actions?query=workflow%3A%22code+checks%22)
+[![luacheck](https://github.com/theFox6/modutil/workflows/code%20checks/badge.svg)](https://github.com/theFox6/modutil/actions?query=workflow%3A%22code+checks%22)
 
 ## usage
 There are several modules in the mod.

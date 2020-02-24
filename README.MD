@@ -1,5 +1,6 @@
 # modutil
-A utility mod for minetetest providing useful utilities that can be used in other mods.
+A utility mod for minetetest providing useful utilities that can be used in other mods.  
+![luacheck](https://github.com/theFox6/modutil/workflows/code%20checks/badge.svg)
 
 ## usage
 There are several modules in the mod.

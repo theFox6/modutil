@@ -1,6 +1,6 @@
 # modutil
+[![luacheck][luacheck badge]][luacheck workflow]  
 A utility mod for minetetest providing useful utilities that can be used in other mods.  
-[![luacheck](https://github.com/theFox6/modutil/workflows/code%20checks/badge.svg)](https://github.com/theFox6/modutil/actions?query=workflow%3A%22code+checks%22)
 
 ## usage
 There are several modules in the mod.
@@ -202,3 +202,6 @@ checks if a given string ends with a given other
 # license
 This mod is under the MIT License.
 Some string and texture utils are from modlib by appgurueu (aka LMD) which is under MIT License.
+
+[luacheck badge]: https://github.com/theFox6/modutil/workflows/luacheck/badge.svg
+[luacheck workflow]: https://github.com/theFox6/modutil/actions?query=workflow%3Aluacheck

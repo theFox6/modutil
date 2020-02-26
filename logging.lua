@@ -24,7 +24,11 @@ function logging.make_loggers(...)
     log.log = logging.make_logger() -- same as "none"
   else
     for _,v in pairs(args) do
-      log[v] = logging.make_logger(v)
+      if v == "none" then
+        log.log = logging.make_logger(v)
+      else
+        log[v] = logging.make_logger(v)
+      end
     end
   end
   return log

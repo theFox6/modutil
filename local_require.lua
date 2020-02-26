@@ -5,7 +5,7 @@ local function make_table(modtable, moduletable)
     modules.init = modtable
   end
   if not modules.log then
-    modules.log = modutil.require("log").make_loggers()
+    modules.log = modutil.require("logging").make_loggers()
   end
 
   local function load_lua(module)

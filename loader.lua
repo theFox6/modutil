@@ -14,13 +14,13 @@ return function (mutil)
     log.warning("modutil's loader cannot be used as a module")
   end
 
-  log.action("loading VenusParser")
-  local vpd = mutil.modpath.."/VenusParser/"
+  log.action("loading LuaVenusCompiler")
+  local vpd = mutil.modpath.."/LuaVenusCompiler/"
   local vpl = dofile(vpd.."init.lua")
-  modules["VenusParser/init"] = vpl
+  modules["LuaVenusCompiler/init"] = vpl
   local vp = vpl(vpd)
-  log.action("loaded VenusParser")
-  modules.VenusParser = vp
+  log.action("loaded LuaVenusCompiler")
+  modules.LuaVenusCompiler = vp
 
   log.action("loading local_require")
   local lreq = dofile(modpath.."/local_require.lua")

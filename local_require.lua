@@ -13,9 +13,9 @@ local function make_table(modtable, moduletable)
     return modules[module]
   end
 
-  local vp = modules.VenusParser or modutil.require("VenusParser")
+  local vc = modules.LuaVenusCompiler or modutil.require("LuaVenusCompiler")
   local function load_venus(module)
-    modules[module] = vp.dovenus(modtable.modpath.."/"..module..".venus") or true
+    modules[module] = vc.dovenus(modtable.modpath.."/"..module..".venus") or true
     return modules[module]
   end
 

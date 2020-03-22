@@ -1,6 +1,6 @@
 print("running venus test script")
 
-local vp_util = dofile("vp_util.lua")
+local vp_util = dofile("vc_util.lua")
 
 local function for_range_test()
 	local a = 0
@@ -204,5 +204,9 @@ end
 assert(vp_util.dftc(concatsub(tt) ,{"hello there", "venus test"}))
 
 assert(not (function()   if(true)  then return end return true end)() )
+
+local ctt = {test = "hello"}
+ctt.test = ctt.test .. " world"
+assert(ctt.test == "hello world")
 
 print("venus test end")

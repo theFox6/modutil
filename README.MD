@@ -38,13 +38,13 @@ Also you could check if modutil is already loaded and then use the global moduti
 
 You'll need an optional dependency on modutil if you want to use the global modutil table.
 
-## VenusParser
+## LuaVenusCompiler
 
-A parser for venus files. Read [it's readme](VenusParser/README.MD) for more info.  
+A parser for venus files. Read [it's readme](LuaVenusCompiler/README.MD) for more info.  
 The parser can load and run venus files.
 Example:
 ```lua
-local vp = modutil.require("VenusParser")
+local vp = modutil.require("LuaVenusCompiler")
 vp.dovenus(modpath.."/some_file.venus")
 ```
 
@@ -198,6 +198,86 @@ checks if a given string starts with a given other
   str:ends_with(suffix)
 ```
 checks if a given string ends with a given other
+
+## accumulators
+
+A module that adds helpers to accumulate function results.
+Load it as usual with:
+```lua
+  local accumulators = modutil.require("accumulators","venus")
+```
+
+predefined accumulators:
+* number_add: adds the given numbers
+* boolean_and: is only true if all added values where true
+* boolean_or: is true if one of the added values was true
+* string_concat: concatenates strings
+
+using accumulators:
+```lua
+-- create a new accumulator based on the number_add accumulator
+local acc = accumulators.number_add:new()
+-- add some stuff
+acc:add(10)
+for x = 0, 10 do
+  acc:add(x)
+end
+-- get the result
+print(acc:get())
+```
+
+creating accumulators:
+```lua
+-- create a new accumulator from the accumulator base
+local string_concat_spaced = accumulators.accumulator:new()
+-- override the add method
+function string_concat_spaced:add(n)
+  self.value = self.value .. " " .. n
+end
+-- override the reset method
+-- it is called inside "new"
+function string_concat_spaced:reset()
+  self.value = ""
+end
+
+-- usage
+local acc = string_concat_spaced:new()
+acc:add("hello")
+acc:add "world"
+print(acc:get())
+acc:reset()
+acc:add("foo")
+acc:add("bar")
+print(acc:get())
+```
+
+accumulating function results:
+
+You can call `accumulators.accumulate_function_results(accumulator,function_table,...)`  
+To call multiple functions with all the given args and accumulate their return values.  
+`accumulate_function_results` will return the value that `accumulator:get()` returns.
+
+example:
+```lua
+local function hello()
+  return "hello"
+end
+local function spaces(n)
+  local s = ""
+  for x = 0, n do
+    s = s .. " "
+  end
+  return s
+end
+local function concat_2_3(_,nd,rd)
+  return nd .. rd
+end
+print(accumulators.accumulate_function_results(
+  accumulators.string_concat:new(), -- the accumulator
+  {hello,spaces,concat_2_3}, -- the functions
+  2,"wo","rld" -- their arguments 
+))
+```
 
 # license
 This mod is under the MIT License.

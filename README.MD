@@ -279,6 +279,26 @@ print(accumulators.accumulate_function_results(
 ))
 ```
 
+# classes
+load with `local classes = modutil.require "classes"
+
+# looputil
+load with `local lu = modutil.require "looputil"
+see [looputil.md](looputil.md)
+
+# cached iterator
+load with `local cit = modutil.require "data_structures/cached_iterator"
+
+# data table
+load with `local dt = modutil.require "data_structures/data_table"
+see [data_structures/data_table.md](data_structures/data_table.md)
+
+# stack
+load with `local stacks = modutil.require "data_structures/stack"
+
+# queue
+load with `local queues = modutil.require "data_structures/queue"
+
 # license
 This mod is under the MIT License.
 Some string and texture utils are from modlib by appgurueu (aka LMD) which is under MIT License.

@@ -61,20 +61,24 @@ local numbers = {
               abortOn = function(stopCond)
                 return {
                   call = function(func)
+                    numberLoop(from,to,stepSize,func,stopCond)
                   end
                 }
               end,
               call = function(func)
+                numberLoop(from,to,stepSize,func)
               end
             }
           end,
           abortOn = function(stopCond)
             return {
               call = function(func)
+                numberLoop(from,to,false,func,stopCond)
               end
             }
           end,
           call = function(func)
+            numberLoop(from,to,false,func)
           end
         }
       end

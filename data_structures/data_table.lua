@@ -22,17 +22,16 @@ function data_table:new(o)
   return setmetatable(n,meta)
 end
 
-function data_table:from(d)
+function data_table.from(d)
   return data_table:new({data = d})
 end
 
-function data_table:of(...)
+function data_table.of(...)
   return data_table:new({data = {...}})
 end
 
-function data_table:generate(func,arg)
+function data_table.generate(func,arg)
   local n = data_table:new()
-  local v
   for v in func,arg do
     n:add(v)
   end
@@ -75,7 +74,7 @@ end
 
 function data_table:accumulate(accumulator,start)
   local result = start
-  for i,v in pairs(self.data) do
+  for _,v in pairs(self.data) do
     if start == nil and result == nil then
       result = v
     else
@@ -99,11 +98,11 @@ function data_table:add(idx, value)
 end
 
 function data_table:addAllValues(other)
-  iterate(other,function(i,v) self:add(v) end,3)
+  iterate(other,function(_,v) self:add(v) end,3)
 end
 
 function data_table:addAllIValues(other)
-  iit(other,function(i,v) self:add(v) end,3)
+  iit(other,function(_,v) self:add(v) end,3)
 end
 
 function data_table:allMatch(pred)
@@ -154,11 +153,11 @@ function data_table:containsAll(other)
   local data_cache = {}
   local match = true
   local it = cit:new(self.data)
-  iterate(other,function(oi,ov)
+  iterate(other,function(_,ov)
     if data_cache[ov] then
       return
     end
-    for mi,mv in cit.next do
+    for mi,mv in it.next do
       data_cache[mv] = mi
       if mv == ov then
         return
@@ -256,7 +255,6 @@ function data_table:equals(other)
   if not data_table.is_data_table(other) then
     return false
   end
-  local uncompared_data = {}
   local it = cit:new(self.data)
   for oi,ov in pairs(other.data) do
     local mi,mv = it:next()

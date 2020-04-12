@@ -15,7 +15,7 @@ creates a new data table
   * every deserialized data_table has to be be passed to `data_table:new(o)` before it works properly
   * to pass contents use `data_table:from` or `data_table:of`
 
-`data_table:from(d)`
+`data_table.from(d)`
 creates a new data table using the table passed as argument to contain it's data
 * d #table
   * the table you would like to have as content of the created object
@@ -27,14 +27,14 @@ dt:setAllFrom(d)
 
 -- or
 
-local dt = data_table:generate(pairs(d))
+local dt = data_table.generate(pairs(d))
 ```
 
-`data_table:of(...)`
+`data_table.of(...)`
 creates a new data table using the passed arguments as data  
 example:
 ```lua
-local dt = data_table:of("foo","bar",2)
+local dt = data_table.of("foo","bar",2)
 dt:forEach(print)
 -- this will print:
 -- 1	foo
@@ -42,7 +42,7 @@ dt:forEach(print)
 -- 3	2
 ```
 
-`data_table:generate(func,arg)`
+`data_table.generate(func,arg)`
 This will call func until it returns nil and add the return values to a newly created data_table.
 * func #funtion
   * the provider for the data_tables contents

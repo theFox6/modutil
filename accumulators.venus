@@ -1,15 +1,11 @@
+local classes = modutil.require "classes"
+
 local accumulators = {}
 
-local accumulator = {}
+local accumulator = classes.create{type_name = "accumulator"}
 fn accumulator:new(o) {
-  local meta = getmetatable(o) or {}
-  meta.__index = self
-  local n
-  if type(o) == "table" {
-    n = setmetatable(o,meta)
-  } else {
-    n = setmetatable({},meta)
-  }
+  local obj = o or {}
+  local n = accumulator.super.new(self,obj)
   n:reset()
   return n
 }

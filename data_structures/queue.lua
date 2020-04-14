@@ -2,12 +2,6 @@ local classes = modutil.require "classes"
 
 local queue = classes.create({type_name = "queue", super = modutil.require("data_structures/data_table")})
 
-function queue:new(o)
-  local obj = o or {}
-  local n = queue.super.new(self,obj)
-  return n
-end
-
 function queue:get(idx)
   if idx then
     return queue.super.get(idx)
